@@ -1,21 +1,26 @@
 import { Plus } from 'phosphor-react'
-import { ProductCarContainer } from './styles'
+import { ProductCardContainer } from './styles'
+import { priceFormatted } from '../../../../utils/priceFormatter'
 
-export function ProductCard() {
+interface ProductCardProps {
+  title: string
+  price: string
+  image: string
+}
+
+export function ProductCard({ title, price, image }: ProductCardProps) {
   return (
-    <ProductCarContainer>
-      <img
-        src="http://http2.mlstatic.com/D_716171-MLA43711395855_102020-W.jpg"
-        alt=""
-      />
+    <ProductCardContainer>
+      <img src={image.replace(/\w\.jpg/gi, 'W.jpg')} alt="" />
+
       <div className="product-info">
-        <h2>R$ 1.296,00</h2>
-        <h3>iPhone 8 Plus 64 Gb Durado</h3>
+        <h2>{priceFormatted(price)}</h2>
+        <h3>{title}</h3>
       </div>
 
       <button>
         <Plus width={45} weight="bold" />
       </button>
-    </ProductCarContainer>
+    </ProductCardContainer>
   )
 }
