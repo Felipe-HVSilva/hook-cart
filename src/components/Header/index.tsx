@@ -1,6 +1,6 @@
 import { MagnifyingGlass, ShoppingCart } from 'phosphor-react'
 import { HeaderContainer } from './styles'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 interface HeaderProps {
   onLoadProduct: (query: string) => void
@@ -12,9 +12,8 @@ export function Header({ onLoadProduct }: HeaderProps) {
 
   // setIsItemCart(true)
 
-  async function handleSearchProduct(e: HTMLFormElement) {
+  async function handleSearchProduct(e: React.FormEvent) {
     e.preventDefault()
-
     onLoadProduct(productSearch)
   }
 
@@ -23,7 +22,7 @@ export function Header({ onLoadProduct }: HeaderProps) {
   return (
     <HeaderContainer>
       <div className="container">
-        <form onSubmit={() => handleSearchProduct}>
+        <form onSubmit={handleSearchProduct}>
           <input
             type="text"
             placeholder="Buscar produtos"
