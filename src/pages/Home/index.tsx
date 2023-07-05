@@ -25,15 +25,13 @@ export function Home() {
     loadProducts('iphone')
   }, [])
 
-  console.log(itemList)
-
   return (
     <>
       <Header onLoadProduct={loadProducts} />
       <Products>
-        {itemList.map((item) => (
+        {itemList.map((item, index) => (
           <ProductCard
-            key={item.title}
+            key={index}
             title={item.title}
             price={item.price}
             image={item.thumbnail}

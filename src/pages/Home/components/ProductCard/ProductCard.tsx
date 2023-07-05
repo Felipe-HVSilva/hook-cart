@@ -1,6 +1,8 @@
 import { Plus } from 'phosphor-react'
 import { ProductCardContainer } from './styles'
 import { priceFormatted } from '../../../../utils/priceFormatter'
+import { useContext } from 'react'
+import { CartContext } from '../../../../context/useCart'
 
 interface ProductCardProps {
   title: string
@@ -9,6 +11,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ title, price, image }: ProductCardProps) {
+  const { addItemCart } = useContext(CartContext)
+
+  const id = 1
+
+  function handleAddNewItemCart() {
+    addItemCart({ title, image, price, id })
+  }
+
   return (
     <ProductCardContainer>
       <img src={image.replace(/\w\.jpg/gi, 'W.jpg')} alt="" />
@@ -18,7 +28,7 @@ export function ProductCard({ title, price, image }: ProductCardProps) {
         <h3>{title}</h3>
       </div>
 
-      <button>
+      <button onClick={handleAddNewItemCart}>
         <Plus width={45} weight="bold" />
       </button>
     </ProductCardContainer>
