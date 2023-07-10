@@ -8,6 +8,7 @@ interface CartProps {
 }
 
 interface CartContextProps {
+  cart: CartProps[]
   addItemCart: (newItem: CartProps) => void
 }
 
@@ -27,7 +28,7 @@ export function CartProvider({ children }: CartProviderProps) {
   console.log(cart)
 
   return (
-    <CartContext.Provider value={{ addItemCart }}>
+    <CartContext.Provider value={{ addItemCart, cart }}>
       {children}
     </CartContext.Provider>
   )

@@ -1,23 +1,22 @@
 import { MagnifyingGlass, ShoppingCart } from 'phosphor-react'
 import { HeaderContainer } from './styles'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { CartContext } from '../../context/useCart'
 
 interface HeaderProps {
   onLoadProduct: (query: string) => void
 }
 
 export function Header({ onLoadProduct }: HeaderProps) {
-  const [isItemCart, setIsItemCart] = useState(false)
+  const { cart } = useContext(CartContext)
   const [productSearch, setProductSearch] = useState('')
-
-  // setIsItemCart(true)
 
   async function handleSearchProduct(e: React.FormEvent) {
     e.preventDefault()
     onLoadProduct(productSearch)
   }
 
-  console.log(productSearch)
+  const isItenOnCart = cart.length > 0
 
   return (
     <HeaderContainer>
@@ -36,7 +35,7 @@ export function Header({ onLoadProduct }: HeaderProps) {
 
         <button className="cart-button">
           <ShoppingCart size={24} />
-          {isItemCart === true ? <span>1</span> : ''}
+          {isItenOnCart ? <span>{cart.length}</span> : ''}
         </button>
       </div>
     </HeaderContainer>

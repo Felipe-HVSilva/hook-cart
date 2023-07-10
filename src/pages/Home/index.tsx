@@ -5,6 +5,7 @@ import { ProductCard } from './components/ProductCard/ProductCard'
 import { Products } from './styles'
 
 import { fetchProducts } from '../../api/fetchProducts'
+import { Cart } from '../../components/Cart'
 
 interface ProductsProps {
   title: string
@@ -38,6 +39,7 @@ export function Home() {
           />
         ))}
       </Products>
+      <Cart />
     </>
   )
 }
