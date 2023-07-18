@@ -11,9 +11,9 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ title, price, image }: ProductCardProps) {
-  const { addItemCart } = useContext(CartContext)
+  const { cart, addItemCart } = useContext(CartContext)
 
-  const id = 1
+  const id = cart.length + 1
 
   function handleAddNewItemCart() {
     addItemCart({ title, image, price, id })

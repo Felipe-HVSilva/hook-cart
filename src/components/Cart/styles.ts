@@ -1,9 +1,15 @@
 import { styled } from 'styled-components'
 
-export const CartContainer = styled.aside`
+interface CartContainerProps {
+  isOpen: boolean
+}
+
+export const CartContainer = styled.aside<CartContainerProps>`
   position: absolute;
   top: 0;
   right: 0;
+
+  opacity: ${(props) => (props.isOpen === true ? 1 : 0)};
 
   background-color: #fff;
 

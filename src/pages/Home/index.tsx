@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 import { useEffect, useState } from 'react'
 
 import { Header } from '../../components/Header'
@@ -15,6 +16,11 @@ interface ProductsProps {
 
 export function Home() {
   const [itemList, setItemList] = useState<ProductsProps[]>([])
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
+  function handleToggleCart() {
+    setIsCartOpen((prevState) => (prevState === false ? true : false))
+  }
 
   async function loadProducts(query: string) {
     const result = await fetchProducts(query)
@@ -28,7 +34,7 @@ export function Home() {
 
   return (
     <>
-      <Header onLoadProduct={loadProducts} />
+      <Header onLoadProduct={loadProducts} onToggleCart={handleToggleCart} />
       <Products>
         {itemList.map((item, index) => (
           <ProductCard
@@ -39,7 +45,7 @@ export function Home() {
           />
         ))}
       </Products>
-      <Cart />
+      <Cart cartIsOpen={isCartOpen} />
     </>
   )
 }

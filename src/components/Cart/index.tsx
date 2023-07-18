@@ -4,21 +4,29 @@ import { useContext } from 'react'
 import { CartContext } from '../../context/useCart'
 import { priceFormatted } from '../../utils/priceFormatter'
 
-export function Cart() {
-  const { cart } = useContext(CartContext)
+interface CartProps {
+  cartIsOpen: boolean
+}
+
+export function Cart({ cartIsOpen }: CartProps) {
+  const { cart, removeItemCart } = useContext(CartContext)
+
+  const priceTotal = cart.reduce((acc, item) => {
+    return acc + Number(item.price)
+  }, 0)
 
   return (
-    <CartContainer>
+    <CartContainer isOpen={cartIsOpen}>
       <CartContent>
         {cart.map((item) => (
-          <div className="cart-item" key={item.id}>
+          <div className="cart-item" key={item.price}>
             <img src={item.image} alt="" />
 
             <div className="cart-info">
               <h3>{item.title}</h3>
               <h2>{priceFormatted(item.price)}</h2>
             </div>
-            <button>
+            <button onClick={() => removeItemCart(item.id)}>
               <MinusCircle size={20} weight="bold" color="red" />
             </button>
           </div>
@@ -27,7 +35,7 @@ export function Cart() {
 
       <div className="price-total">
         <span>Total</span>
-        <strong>R$ 2500</strong>
+        <strong>{priceFormatted(String(priceTotal))}</strong>
       </div>
     </CartContainer>
   )

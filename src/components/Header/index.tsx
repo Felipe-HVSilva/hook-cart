@@ -5,9 +5,10 @@ import { CartContext } from '../../context/useCart'
 
 interface HeaderProps {
   onLoadProduct: (query: string) => void
+  onToggleCart: () => void
 }
 
-export function Header({ onLoadProduct }: HeaderProps) {
+export function Header({ onLoadProduct, onToggleCart }: HeaderProps) {
   const { cart } = useContext(CartContext)
   const [productSearch, setProductSearch] = useState('')
 
@@ -33,7 +34,7 @@ export function Header({ onLoadProduct }: HeaderProps) {
           </button>
         </form>
 
-        <button className="cart-button">
+        <button className="cart-button" onClick={onToggleCart}>
           <ShoppingCart size={24} />
           {isItenOnCart ? <span>{cart.length}</span> : ''}
         </button>

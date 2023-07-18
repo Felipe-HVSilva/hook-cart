@@ -10,6 +10,7 @@ interface CartProps {
 interface CartContextProps {
   cart: CartProps[]
   addItemCart: (newItem: CartProps) => void
+  removeItemCart: (itemId: number) => void
 }
 
 interface CartProviderProps {
@@ -25,10 +26,14 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart([...cart, newItem])
   }
 
-  console.log(cart)
+  function removeItemCart(itemId: number) {
+    const removeItem = cart.filter((item) => item.id !== itemId)
+
+    setCart(removeItem)
+  }
 
   return (
-    <CartContext.Provider value={{ addItemCart, cart }}>
+    <CartContext.Provider value={{ addItemCart, removeItemCart, cart }}>
       {children}
     </CartContext.Provider>
   )
